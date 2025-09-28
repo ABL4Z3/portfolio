@@ -3,9 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aayush Kumar - AI/ML Developer</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Aayush Kumar - AI/ML Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #6e8efb;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></svg>') repeat;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .highlight {
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .about h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .profile-image {
+            flex: 1;
+        }
+
+        .image-placeholder {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .about-text {
+            flex: 2;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills {
+            background-color: #f5f5f5;
+        }
+
+        .skills h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: #6e8efb;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .skill-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+
+        /* Projects Section */
+        .projects {
+            background-color: white;
+        }
+
+        .projects h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: #6e8efb;
+        }
+
+        .project-card i {
+            font-size: 2.5rem;
+            color: #6e8efb;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            color: #666;
+            flex-grow: 1;
+        }
+
+
+        /* Contact Section */
+        .contact {
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-info i {
+            color: #6e8efb;
+            margin-right: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-link {
+            color: #333;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #6e8efb;
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 0.5rem 0;
+            }
+
+            nav a {
+                margin: 0.5rem 0;
+            }
+            
+            header {
+                position: absolute; /* Change to absolute on mobile to prevent content jump */
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -23,8 +410,8 @@
 
         <section id="home" class="hero">
             <div class="hero-content">
-                <h1 class="animate-text">Hello, I'm <span class="highlight">Ayush Kumar</span></h1>
-                <p class="subtitle">AI/ML Developer | Data Science Enthusiast</p>
+                <h1 class="animate-text">Hello, I'm <span class="highlight">Aayush Kumar</span></h1>
+                <p class="subtitle">AI/ML Engineer</p>
             </div>
         </section>
 
@@ -37,8 +424,8 @@
                     </div>
                 </div>
                 <div class="about-text">
-                    <p>I am a motivated and enthusiastic B.Tech AIML student with a strong foundation in Machine Learning, Deep Learning, LangChain, and Hugging Face. Currently pursuing my degree at Moradabad Institute of Technology with a CGPA of 8.75.</p>
-                    <p>My passion lies in developing intelligent systems and solving complex problems using AI/ML technologies. I'm constantly exploring new advancements in the field and applying them to real-world projects.</p>
+                    <p>Results-driven AI/ML Engineer with hands-on expertise in LLMs, data preprocessing, and API integration. I specialize in delivering end-to-end AI solutions with faster processing and high accuracy.</p>
+                    <p>Skilled in model deployment, automation, and cloud workflows, I am eager to apply scalable AI methods to solve real-world challenges in dynamic tech environments. Currently pursuing my B.Tech in AI & ML at Moradabad Institute of Technology.</p>
                 </div>
             </div>
         </section>
@@ -49,22 +436,22 @@
                 <div class="skill-card">
                     <i class="fas fa-code"></i>
                     <h3>Programming</h3>
-                    <p>Python, Java, C, SQL</p>
+                    <p>Python, Java, C, SQL, HTML, CSS</p>
                 </div>
                 <div class="skill-card">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>Web Development</h3>
-                    <p>HTML, CSS, Flask</p>
+                    <i class="fas fa-cogs"></i>
+                    <h3>Frameworks & Tools</h3>
+                    <p>Flask, FastAPI, LangChain, LangGraph, Streamlit, OpenCV, MediaPipe</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-robot"></i>
-                    <h3>AI/ML</h3>
-                    <p>scikit-learn, LangChain, Hugging Face</p>
+                    <h3>ML/AI Libraries</h3>
+                    <p>scikit-learn, XGBoost, TensorFlow, PyTorch, Pandas, NumPy, Matplotlib</p>
                 </div>
                 <div class="skill-card">
-                    <i class="fas fa-tools"></i>
-                    <h3>Tools</h3>
-                    <p>Git, Jupyter Notebook, VS Code</p>
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud & DevOps</h3>
+                    <p>AWS (S3, EC2), Docker, Git, GitHub, VS Code, Jupyter Notebook</p>
                 </div>
             </div>
         </section>
@@ -72,6 +459,36 @@
         <section id="projects" class="projects">
             <h2>Projects</h2>
             <div class="projects-grid">
+                <div class="project-card">
+                    <i class="fas fa-camera-retro"></i>
+                    <h3>AI Object & Finger Counter</h3>
+                    <p>A real-time object and gesture recognition system using YOLOv8 & MediaPipe with 90%+ accuracy.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-microphone-alt"></i>
+                    <h3>Speech Emotion Recognition</h3>
+                    <p>Developed with LangChain for multilingual emotion analysis, achieving 92% classification accuracy.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-file-code"></i>
+                    <h3>AI Code Analyzer</h3>
+                    <p>A FastAPI & Gemini LLM tool to auto-detect and fix code errors with 85% correction rate.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>OCR + LLM Document Chatbot</h3>
+                    <p>FastAPI & Streamlit app using Tesseract OCR, enabling users to query documents with 90%+ accuracy.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Smart Crop Recommender</h3>
+                    <p>ML-powered system with 98% accuracy for crop prediction based on soil and weather data.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-keyboard"></i>
+                    <h3>AI Form Assistant</h3>
+                    <p>An LLM-powered conversational assistant that reduces manual form entry time by 70%.</p>
+                </div>
                 <div class="project-card">
                     <i class="fas fa-project-diagram"></i>
                     <h3>SmartMLPipeline</h3>
@@ -82,43 +499,73 @@
                     <h3>Human Age Prediction</h3>
                     <p>Regression model with MAE of 4.16, deployed on Kaggle</p>
                 </div>
-                <div class="project-card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Spam Email Classifier</h3>
-                    <p>NLP-based spam detection system</p>
-                </div>
-                <div class="project-card">
-                    <i class="fas fa-heartbeat"></i>
-                    <h3>Heart Attack Prediction</h3>
-                    <p>Binary classification using Random Forest and Logistic Regression</p>
-                </div>
-                <div class="project-card">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <h3>Loan Prediction System</h3>
-                    <p>ML-based loan approval classification system</p>
-                </div>
-                <div class="project-card">
-                    <i class="fas fa-drafting-compass"></i>
-                    <h3>MNIST Digit Recognition</h3>
-                    <p>CNN model with 98% accuracy for handwritten digit recognition</p>
-                </div>
             </div>
         </section>
 
         <section id="contact" class="contact">
             <h2>Get in Touch</h2>
             <div class="contact-info">
-                <p><i class="fas fa-map-marker-alt"></i> Vasant Vihar, Gali No. 7, Moradabad</p>
+                <p><i class="fas fa-map-marker-alt"></i> Moradabad, U.P., India</p>
                 <p><i class="fas fa-phone"></i> +91 8077709912</p>
                 <p><i class="fas fa-envelope"></i> ayushkumarshivaliya@gmail.com</p>
             </div>
             <div class="contact-links">
-                <a href="https://github.com/ABL4Z3" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="https://abl4z3.github.io/#algorithms" target="_blank" class="social-link"><i class="fas fa-globe"></i></a>
-                <a href="mailto:ayushkumarshivaliya@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/ABL4Z3" target="_blank" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://abl4z3.github.io/" target="_blank" class="social-link" aria-label="Portfolio"><i class="fas fa-globe"></i></a>
+                <a href="mailto:ayushkumarshivaliya@gmail.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </section>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                         // The offset calculation depends on whether the header is fixed or absolute
+                        const headerOffset = document.querySelector('header').offsetHeight || 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add scroll animation for sections
+            const sections = document.querySelectorAll('section');
+            const options = {
+                root: null, // relative to the viewport
+                threshold: 0.1,
+                rootMargin: "0px"
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Optional: unobserve after it's visible so it doesn't re-animate
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // No need for a separate typing effect script, CSS animations handle this
+        });
+    </script>
 </body>
-</html> 
+</html>
+
